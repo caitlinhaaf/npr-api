@@ -1,0 +1,76 @@
+<!doctype html>
+<html ng-app="myApp">
+
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="css/normalize.css" media="screen">
+    <link rel="stylesheet" href="css/master.css" media="screen">
+  </head>
+
+<!-- <body> -->
+
+<section class="container">
+
+  <h1>NPR Search App</h1>
+
+  <!-- RECENT SHOWS -->
+  <div class="">
+    <h2>Recent Shows:</h2>
+    <!-- PLAYER CONTROLLER ELEMENT -->
+    <!-- currently showing the most recent show results -->
+    <div ng-controller="PlayerController">
+      <ul id="programs_list" class="" >
+        <!-- loop (repeat) through each of the programs... -->
+        <li class="recentListItems" id="$index" ng-repeat="program in programs">
+          <!-- row play button -->
+          <button
+          ng-class="{ 'buttonOn': $index == selectedIndex }"
+          id="$index"
+          ng-click="play(program, $index)">
+          &#x25b6;</button>
+
+          <div class="showInfo">
+            <!-- <img src={{program.image}} alt="" /> -->
+            <span>{{ program.title.$text }}</span>
+
+            <div class="">
+              <span class="date">{{ program.storyDate.$text }}</span>
+            </div>
+
+            <div class="">
+              <span class="teaser">{{ program.teaser.$text | limitTo:50}}...</span>
+            </div>
+
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div ng-controller="Search">
+    <!-- <span>{{ searchResults }}</span> -->
+    <input type="text" value="">
+    <button type="button" ng-click="search()"> </button>
+    <ul id="searchResults">
+      <li ng-repeat="result in searchResults">
+          {{ result.title.$text }}
+      </li>
+
+
+
+
+    </ul>
+
+  </div>
+
+
+  </section>
+
+<!-- </body> -->
+</html>

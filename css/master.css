@@ -1,0 +1,55 @@
+/* orange/red = #ee3a23 */
+
+body{
+  font-family: "Helvetica", "Arial", sans-serif;
+  background-color: #EEE;
+}
+
+.container{
+  margin: 2rem 1rem;
+}
+
+h2{
+  font-weight: bold;
+  color: #4067b2;
+  font-size: 1.5rem;
+  margin: 0 0 .667rem 0;
+}
+
+ul{
+  list-style-type: none;
+}
+
+.recentListItems{
+  margin: 3% 0;
+}
+
+button{
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid black;
+}
+
+.buttonOff{
+  background: white;
+}
+
+.buttonOn{
+  background: #748fc6;
+}
+
+.showInfo{
+  display: inline;
+}
+
+.date{
+  font-style: italic;
+}
+
+.date, .teaser{
+  font-size: .667rem;
+  color: #666;
+}
