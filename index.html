@@ -2,6 +2,7 @@
 <html ng-app="myApp">
 
   <head>
+    <title>NPR Streaming and Search App</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
@@ -16,11 +17,11 @@
 
 <section class="container">
 
-  <h1>NPR Search App</h1>
+  <h1>NPR Stream &#x26; Search</h1>
 
   <!-- RECENT SHOWS -->
   <div class="">
-    <h2>Recent Shows:</h2>
+    <h2>Recent Shows</h2>
     <!-- PLAYER CONTROLLER ELEMENT -->
     <!-- currently showing the most recent show results -->
     <div ng-controller="PlayerController">
@@ -35,7 +36,7 @@
           &#x25b6;</button>
 
           <div class="showInfo">
-            <!-- <img src={{program.image}} alt="" /> -->
+            <img src={{program.image.src}} alt="" />
             <span>{{ program.title.$text }}</span>
 
             <div class="">
@@ -43,7 +44,7 @@
             </div>
 
             <div class="">
-              <span class="teaser">{{ program.teaser.$text | limitTo:50}}...</span>
+              <span class="teaser">{{ program.teaser.$text}}</span>
             </div>
 
           </div>
@@ -53,9 +54,9 @@
   </div>
 
 
-  <div ng-controller="Search">
+  <div class="search" ng-controller="Search">
     <!-- <span>{{ searchResults }}</span> -->
-    <input type="text" value="">
+    <input class="search--input" type="text" value="" placeholder="Search stories by topic...">
     <button type="button" ng-click="search()"> </button>
     <ul id="searchResults">
       <li ng-repeat="result in searchResults">
