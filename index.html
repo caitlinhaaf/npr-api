@@ -15,19 +15,22 @@
 
 <!-- <body> -->
 
-<section class="container">
-
+<header>
   <h1>NPR Stream &#x26; Search</h1>
+</header>
 
+<section class="playContainer">
   <!-- RECENT SHOWS -->
   <div class="">
     <h2>Recent Shows</h2>
     <!-- PLAYER CONTROLLER ELEMENT -->
     <!-- currently showing the most recent show results -->
     <div ng-controller="PlayerController">
-      <ul id="programs_list" class="" >
+      <div id="programs_list" class="" >
+
         <!-- loop (repeat) through each of the programs... -->
-        <li class="recentListItems" id="$index" ng-repeat="program in programs">
+        <!-- make container a flex conatiner -->
+        <div class="recentListItems" id="$index" ng-repeat="program in programs">
           <!-- row play button -->
           <button
           ng-class="{ 'buttonOn': $index == selectedIndex }"
@@ -36,7 +39,7 @@
           &#x25b6;</button>
 
           <div class="showInfo">
-            <img src={{program.image.src}} alt="" />
+            <!-- <img src={{program.image.src}} alt="" /> -->
             <span>{{ program.title.$text }}</span>
 
             <div class="">
@@ -46,32 +49,61 @@
             <div class="">
               <span class="teaser">{{ program.teaser.$text}}</span>
             </div>
-
           </div>
-        </li>
-      </ul>
+          <!-- end of flex container -->
+        </div>
+      </div>
     </div>
   </div>
+  </section>
 
 
   <div class="search" ng-controller="Search">
+    <h2>Search Stories</h2>
     <!-- <span>{{ searchResults }}</span> -->
-    <input class="search--input" type="text" value="" placeholder="Search stories by topic...">
-    <button type="button" ng-click="search()"> </button>
+    <!-- <input class="search--input" type="text" value="" placeholder="Search stories by topic..."> -->
+
+
+    <!-- <form class="" action="index.html" method="post"> -->
+      <!-- check marks associated with different topics -->
+      <input type="checkbox" name="artsLife" value="" ng-model="checkboxModel.value1">
+      <label for="artsLife">Arts &#x26; Life</label>
+
+      <input type="checkbox" name="artsLife" value="" ng-model="checkboxModel.value2">
+      <label for="artsLife">Economy</label>
+
+      <input type="checkbox" name="artsLife" value="" ng-model="checkboxModel.value3">
+      <label for="artsLife">Health</label>
+
+      <input type="checkbox" name="artsLife" value="" ng-model="checkboxModel.value4">
+      <label for="artsLife">Science</label>
+
+      <input type="checkbox" name="artsLife" value="" ng-model="checkboxModel.value5">
+      <label for="artsLife">Technology</label>
+
+
+
+      <button class="submitSearch" type="submit" ng-click="search()">Submit</button>
+    </form>
+
+    <!-- SEARCH RESULTS... -->
     <ul id="searchResults">
       <li ng-repeat="result in searchResults">
           {{ result.title.$text }}
+          <div class="">
+            <span class="date">{{ result.storyDate.$text }}</span>
+          </div>
+          <div class="">
+            <span class="teaser">{{ result.teaser.$text }}</span>
+          </div>
       </li>
-
-
-
-
     </ul>
 
+  <!-- end of search section -->
   </div>
 
 
-  </section>
+
 
 <!-- </body> -->
 </html>

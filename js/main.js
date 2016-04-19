@@ -18,8 +18,17 @@ var apiKey = 'MDIzODc0NDUxMDE0NjA5NDc4NzYzY2U5ZQ000',
     'http://api.npr.org/query?requiredAssets=audio&startDate='+todaysDate+'&dateType=story&fields=title,teaser,audio,image,show,storyDate&sort=dat&output=JSON'
 
     //
-    searchNprUrl =
-    'http://api.npr.org/list?id=3002&numResults=2&output=JSON';
+    searchNprUrl1 =
+    'http://api.npr.org/query?dateType=story'
+    searchNprUrl2 =
+    '&fields=title,teaser,audio,image,show,storyDate&output=JSON';
+
+
+    //pulls arts & life...
+    // searchNprUrl =
+    // 'http://api.npr.org/query?dateType=story&childrenOf=1008&fields=title,teaser,audio,image,show,storyDate&output=JSON';
+    //pulls all topics...
+    // 'http://api.npr.org/list?id=3002&numResults=2&output=JSON';
 
 
 //PLAY LIST/CONTROLLER
@@ -38,8 +47,8 @@ app.controller('PlayerController', function($scope, $http) {
     $scope.selectedIndex = index;
 
     //change button class
-    if ($scope.class === "buttonOff") $scope.class = "buttonOn";
-    else {$scope.class = "buttonOff"}
+    if ($scope.class == "buttonOff") $scope.class = "buttonOn";
+    else {$scope.class = ""}
 
     if ($scope.playing){
       audio.pause();
@@ -76,19 +85,41 @@ app.controller('PlayerController', function($scope, $http) {
 
 
 app.controller('Search', function($scope, $http){
+    //evaluate value of the check box(es)
+    //concatenate together and add to api call
+    //
+    $scope.checkboxModel = {
+       value1 : false,
+       value2 : false,
+       value3 : false,
+       value4 : false,
+       value5 : false
+     };
+
+     //topic codes:
+    //  arts&life = &childrenOf=1008
+    //  economy = 1017
+    //  health = 1128
+    //science = 1007
+    //technology = 1019
+
 
     $scope.search = function(){
-      console.log("searching...");
+      // console.log("searching...");
+      console.log($scope.checkboxModel);
+
+      var children = '&childrenOf=1008';
       //http request for search bar...
       // http ajax request to the api
       $http({
         method: 'JSONP',
-        url: searchNprUrl + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
+        url: searchNprUrl1 + children + searchNprUrl2 + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
         // url: nprUrl + '&callback=JSON_CALLBACK'
 
       }).success(function(data, status) {
-      $scope.searchResults = data.item;
-      console.log(data);
+      $scope.searchResults = data.list.story;
+      console.log(data.list.story);
+
       }).error(function(data, status) {
         // Some error occurred
         console.log("oops...");
