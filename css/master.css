@@ -29,6 +29,12 @@ h1{
   margin: 2rem auto;
 }
 
+.descript{
+  color: #666;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+}
+
 h2{
   font-weight: bold;
   color: #4067b2;
@@ -47,6 +53,11 @@ ul{
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+button:focus{
+  outline-color: transparent;
+  outline-style: none;
 }
 
 .recentListItems button{
