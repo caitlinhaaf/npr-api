@@ -18,17 +18,12 @@ var apiKey = 'MDIzODc0NDUxMDE0NjA5NDc4NzYzY2U5ZQ000',
     'http://api.npr.org/query?requiredAssets=audio&startDate='+todaysDate+'&dateType=story&fields=title,teaser,audio,image,show,storyDate&sort=dat&numResults=5&output=JSON'
 
 
-    searchNprUrl = 'http://api.npr.org/query?dateType=story&id=1008&fields=title,teaser,storyDate&output=JSON';
+    // searchNprUrl = 'http://api.npr.org/query?dateType=story&id=1008&fields=title,teaser,storyDate&output=JSON';
 
-    // searchNprUrl1 =
-    // 'http://api.npr.org/query?dateType=story'
-    // searchNprUrl2 =
-    // '&childrenOf=1019&fields=title,teaser,audio,image,show,storyDate&output=JSON';
-
-    //pulls arts & life...
-    // searchNprUrl =
-    //'http://api.npr.org/query?dateType=story&childrenOf=1008&fields=title,teaser,audio,image,show,storyDate&output=JSON';
-
+    searchNprUrl1 =
+    'http://api.npr.org/query?dateType=story'
+    searchNprUrl2 =
+    '&childrenOf=1019&fields=title,teaser,audio,image,show,storyDate&output=JSON';
 
 //PLAY LIST/CONTROLLER
 app.controller('PlayerController', function($scope, $http) {
@@ -48,10 +43,11 @@ app.controller('PlayerController', function($scope, $http) {
     if ($scope.class == "buttonOff" && index!=$scope.selectedIndex) $scope.class = "buttonOn";
     else if (index == $scope.selectedIndex) $scope.class = "buttonOff";
 
-
+    //pause/play/switch audio source function
     if ($scope.playing && index == $scope.selectedIndex){
       audio.pause();
       $scope.playing = false;
+      $scope.class = "buttonOff";
       // console.log($scope.playing);
     }else if(!$scope.playing && index == $scope.selectedIndex){
       audio.play();
@@ -63,7 +59,6 @@ app.controller('PlayerController', function($scope, $http) {
       $scope.playing = true;//store playing state...
       // console.log($scope.playing);
     }
-
     //reset selectedIndex
     $scope.selectedIndex = index;
   }
@@ -72,82 +67,71 @@ app.controller('PlayerController', function($scope, $http) {
   $http({
     method: 'JSONP',
     url: recentNprUrl + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
-    // url: nprUrl + '&callback=JSON_CALLBACK'
-
   }).success(function(data, status) {
-  $scope.programs = data.list.story;
+  $scope.programs = data.list.story; //path to story info
 
-  // grab image if available
+  // TODO grab image if available
   //if not available, use a placeholder
   console.log(data.list.story.image);
-
   // console.log(data.list.story);
   }).error(function(data, status) {
     // Some error occurred
     console.log("oops...");
   });
-
 //end of player controller
 });
 
 
-
-
+// SEARCH BY TOPIC CONTROLLER
+//------------------------------
 app.controller('Search', function($scope, $http){
     //evaluate value of the check box(es)
     //concatenate together and add to api call
-    //
-    $scope.checkboxModel = {
-       value1 : false,
-       value2 : false,
-       value3 : false,
-       value4 : false,
-       value5 : false
+
+    //topics array
+    $scope.topics = [
+      {name: 'Arts & Life', selected: false, query:"&id=1008" },
+      {name: 'Economy', selected: false, query:"&id=1017"},
+      {name: 'Health', selected: false, query:"&id=1028"},
+      {name: 'Science', selected: false, query:"&id=1007"},
+      {name: 'Technology', selected: false, query:"&id=1019"}
+    ]
+
+    // selected topics
+    $scope.selection = [];
+
+    // helper method to get selected topics
+     $scope.selectedTopics = function selectedTopics() {
+       return filterFilter($scope.topics, { selected: true });
      };
 
-    var topics = [ "&id=1008", //arts and life
-                  "&id=1017",  //economy
-                  "&id=1028",  //health
-                  "&id=1007",  //science
-                  "&id=1019"]  //technology
+     // watch topics for changes
+    $scope.$watch('topics|filter:{selected:true}', function (nv) {
+      $scope.selection = nv.map(function (topic) {
+        return topic.query;
+      });
+    }, true);
 
-    // console.log($scope.checkboxModel);
-
+    // SEARCH BY TOPIC FUNCTION
+    //------------------------------
     $scope.search = function(){
-      // console.log("searching...");
-
-      //check which checkboxes are selected
-      // var addTopics = [];
-      // for (var check in checkboxModel){
-      //   console.log("a checkmark!");
-      // }
-
-      //grab topic query
-
-      // var children = '&childrenOf=1019';
-      // var chidren;
-
-
-      // http ajax request to the api
-      // var searchTopics = topics.join("");
-      console.log(addTopics);
-
+      // console.log($scope.selection);
+      var searchTopics = $scope.selection.join("");
+      console.log(searchTopics);
 
       $http({
         method: 'JSONP',
         // url: searchNprUrl1 + children + searchNprUrl2 + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
-        url: searchNprUrl + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
+        url: searchNprUrl1 + searchTopics + searchNprUrl2 + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
 
       }).success(function(data, status) {
-      $scope.searchResults = data.list.story;
+      $scope.searchResults = data.list.story;//path to story info
       console.log(data.list.story);
-
       }).error(function(data, status) {
         // Some error occurred
         console.log("oops...");
       });
     }
-
 
 
 //end of search controller

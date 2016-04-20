@@ -63,13 +63,21 @@
 
   <div class="search" ng-controller="Search">
     <h2>Search Stories</h2>
-    <!-- <span>{{ searchResults }}</span> -->
-    <!-- <input class="search--input" type="text" value="" placeholder="Search stories by topic..."> -->
+
+      <!-- CHECKBOXES -->
+      <label ng-repeat="topic in topics">
+        <input
+           type="checkbox"
+           name="selectedTopics[]"
+           value="{{topic.name}}"
+           ng-model="topic.selected"
+         > {{topic.name}}
+      </label>
 
 
-    <!-- <form class="" action="index.html" method="post"> -->
-      <!-- check marks associated with different topics -->
-      <input type="checkbox" name="artsLife" value="" ng-model="checkboxModel.value1">
+
+
+      <!-- <input type="checkbox" name="artsLife" value="" ng-model="checkboxModel.value1">
       <label for="artsLife">Arts &#x26; Life</label>
 
       <input type="checkbox" name="artsLife" value="" ng-model="checkboxModel.value2">
@@ -82,7 +90,9 @@
       <label for="artsLife">Science</label>
 
       <input type="checkbox" name="artsLife" value="" ng-model="checkboxModel.value5">
-      <label for="artsLife">Technology</label>
+      <label for="artsLife">Technology</label> -->
+
+
 
 
 
