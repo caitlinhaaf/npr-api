@@ -37,7 +37,7 @@ app.controller('PlayerController', function($scope, $http) {
   $scope.selectedIndex = -1;
 
   $scope.play = function(program, index) {
-    console.log(index);
+    // console.log(index);
 
     //change button class
     if ($scope.class == "buttonOff" && index!=$scope.selectedIndex) $scope.class = "buttonOn";
@@ -72,7 +72,8 @@ app.controller('PlayerController', function($scope, $http) {
 
   // TODO grab image if available
   //if not available, use a placeholder
-  console.log(data.list.story.image);
+  // console.log(data.list.story.image);
+
   // console.log(data.list.story);
   }).error(function(data, status) {
     // Some error occurred
@@ -117,7 +118,13 @@ app.controller('Search', function($scope, $http){
     $scope.search = function(){
       // console.log($scope.selection);
       var searchTopics = $scope.selection.join("");
-      console.log(searchTopics);
+      // console.log(searchTopics);
+
+      // watch topics for changes
+     $scope.$watch('searchTopics', function (nv) {
+      //  console.log("query changed");
+     }, true);
+
 
       $http({
         method: 'JSONP',
@@ -126,7 +133,7 @@ app.controller('Search', function($scope, $http){
 
       }).success(function(data, status) {
       $scope.searchResults = data.list.story;//path to story info
-      console.log(data.list.story);
+      // console.log(data.list.story);
       }).error(function(data, status) {
         // Some error occurred
         console.log("oops...");
