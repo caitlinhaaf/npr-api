@@ -51,23 +51,21 @@ app.controller('PlayerController', function($scope, $http) {
 
     if ($scope.playing && index == $scope.selectedIndex){
       audio.pause();
-      // $scope.playing = false;
-
-      console.log($scope.playing);
-      // return;
+      $scope.playing = false;
+      // console.log($scope.playing);
+    }else if(!$scope.playing && index == $scope.selectedIndex){
+      audio.play();
+      $scope.playing = true;
     }else{
       var url = program.audio[0].format.mp4.$text;
       audio.src = url;
       audio.play();
       $scope.playing = true;//store playing state...
-
-      console.log($scope.playing);
+      // console.log($scope.playing);
     }
 
     //reset selectedIndex
     $scope.selectedIndex = index;
-
-
   }
 
   // http ajax request to the api
