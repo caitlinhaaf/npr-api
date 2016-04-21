@@ -5,10 +5,6 @@
     <title>NPR Streaming and Search App</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
-
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
-
     <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/normalize.css" media="screen">
     <link rel="stylesheet" href="css/master.css" media="screen">
@@ -17,7 +13,8 @@
 <!-- <body> -->
 
 <header>
-  <h1>NPR Stream &#x26; Search</h1>
+  <img src="img/npr.png" alt="NPR logo" width="100px"/>
+  <h1>Stream &#x26; Search Application</h1>
 </header>
 
 <section class="playContainer">
@@ -35,7 +32,7 @@
         <div class="recentListItems" id="$index" ng-repeat="program in programs">
           <!-- row play button -->
           <button
-          ng-class="{ 'buttonOn': $index == selectedIndex }"
+          ng-class="{'buttonOn': $index == selectedIndex}"
           id="$index"
           ng-click="play(program, $index)">
           &#x25b6;</button>

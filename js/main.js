@@ -17,18 +17,15 @@ var apiKey = 'MDIzODc0NDUxMDE0NjA5NDc4NzYzY2U5ZQ000',
     recentNprUrl =
     'http://api.npr.org/query?requiredAssets=audio&startDate='+todaysDate+'&dateType=story&fields=title,teaser,audio,image,show,storyDate&sort=dat&numResults=5&output=JSON'
 
-
-    // searchNprUrl = 'http://api.npr.org/query?dateType=story&id=1008&fields=title,teaser,storyDate&output=JSON';
-
     searchNprUrl1 =
     'http://api.npr.org/query?dateType=story'
     searchNprUrl2 =
     '&childrenOf=1019&fields=title,teaser,audio,image,show,storyDate&output=JSON';
 
+
 //PLAY LIST/CONTROLLER
 app.controller('PlayerController', function($scope, $http) {
-  //add audio player (not controls)
-
+  //add audio player (not controls)i
   var audio = document.createElement('audio');
   // $scope.audio = audio;
   // audio.src = 'http://pd.npr.org/npr-mp4/npr/sf/2013/07/20130726_sf_05.mp4?orgId=1&topicId=1032&ft=3&f=61';
