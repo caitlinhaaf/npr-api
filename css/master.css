@@ -38,6 +38,7 @@ h1{
   color: #666;
   font-size: 1rem;
   margin-top: 0.2rem;
+  margin-bottom: 0.8rem;
 }
 
 h2{
@@ -83,8 +84,8 @@ button:focus{
 }
 
 .showInfo{
-  /*display: inline;*/
   width: 85%;
+  margin: 5px 5px 5px 10px;
 }
 
 .date{
@@ -105,28 +106,27 @@ button:focus{
 }
 
 .search h2{
-  margin-bottom: .667rem;
+  /*margin-bottom: .667rem;*/
   color: white;
 }
 
-.search--input{
-  width: 70%;
-  height: 3rem;
-  border: 0;
-  margin:0;
-  padding: 0 3%;
+.chkBox{
+  margin: 0 20px 0 0;
+  display: inline-block;
 }
 
 .submitSearch{
   width: 40%;
+  max-width: 400px;
+  cursor: pointer;
   height: 3rem;
   border: 0;
   background: #ee3a23;
   color: white;
   font-weight: bold;
-  margin-top: 3%;
-  /*margin-left: -0.6%;*/
+  margin: 3% auto;
   display: block;
+  font-size: 1rem;
 }
 
 .search li{
@@ -135,4 +135,20 @@ button:focus{
 
 #searchResults .teaser, #searchResults .date{
   color: #EEE;
+}
+
+@media (max-width: 550px){
+  .submitSearch{
+    width: 100%;
+  }
+  span.teaser{
+    display: none;
+  }
+}
+
+@media (max-width: 700px){
+  .chkBox{
+    margin: 2px 0;
+    display: block;
+  }
 }
